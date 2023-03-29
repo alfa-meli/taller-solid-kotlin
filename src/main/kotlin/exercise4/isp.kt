@@ -1,52 +1,81 @@
 package exercise4
 
-interface Insertable {
-    fun Insertar()
-}
-
-interface Consultable {
-    fun Consultar()
-}
-
 interface Database {
-    fun Conectar()
-    fun Desconectar()
+    fun conectar()
+    fun desconectar()
+    fun insertar()
+    fun eliminar()
+    fun actualizar()
+    fun consultar()
 }
 
 class MiBaseDeDatos : Database {
-    override fun Conectar() {
+    override fun conectar() {
         // lógica de conexión a la base de datos
     }
 
-    override fun Desconectar() {
+    override fun desconectar() {
         // lógica de desconexión de la base de datos
+    }
+
+    override fun insertar() {
+        // lógica de inserción en la base de datos
+    }
+
+    override fun eliminar() {
+        // lógica de eliminación en la base de datos
+    }
+
+    override fun actualizar() {
+        // lógica de actualización en la base de datos
+    }
+
+    override fun consultar() {
+        // lógica de consulta en la base de datos
     }
 }
 
 class Cliente {
-    fun Insertar(db: Insertable) {
-        db.Insertar()
-    }
-
-    fun Consultar(db: Consultable) {
-        db.Consultar()
+    fun utilizarBaseDeDatos(db: Database) {
+        // lógica de uso de la base de datos
+        db.conectar()
+        db.insertar()
+        db.consultar()
+        db.desconectar()
     }
 }
 
-class MiTabla : Insertable, Consultable {
-    override fun Insertar() {
+class MiTabla : Database {
+    override fun conectar() {
+        // no implementado
+    }
+
+    override fun desconectar() {
+        // no implementado
+    }
+
+    override fun insertar() {
         // lógica de inserción en la tabla
     }
 
-    override fun Consultar() {
+    override fun eliminar() {
+        // no implementado
+    }
+
+    override fun actualizar() {
+        // no implementado
+    }
+
+    override fun consultar() {
         // lógica de consulta en la tabla
     }
 }
 
 fun main() {
+    val db = MiBaseDeDatos()
     val tabla = MiTabla()
 
     val cliente = Cliente()
-    cliente.Insertar(tabla)
-    cliente.Consultar(tabla)
+    cliente.utilizarBaseDeDatos(db)
+    cliente.utilizarBaseDeDatos(tabla)
 }
